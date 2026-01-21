@@ -8,7 +8,7 @@ This document provides an overview of the Spyre Operator for IBM Z and IBM Linux
 
 The Spyre Operator allows users and cluster administrators to configure Spyre in Red Hat OpenShift. It works as a centralized one-stop operator that coordinates many essential components, which can hide the complexity of the Spyre enablement processes in the cluster. The operator ensures that pods are scheduled to nodes with available Spyre devices and manages device allocation at runtime.
 
-## [Prerequisites on Red Hat OpenShift using OperatorHub](#)
+## [Prerequisites on Red Hat OpenShift using OperatorHub](docs/prerequisites/prerequisites.md)
 
 ## [Installing the Spyre Operator](#)
 
