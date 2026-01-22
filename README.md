@@ -21,3 +21,8 @@ The Spyre Operator helps your cluster run AI workloads more efficiently. It impr
 ## [Security advisory](docs/security/security.md)
 
 ## [Limitations for the Spyre Operator](docs/limitations/limitations.md)
+
+## Related topics:
+
+[IBM Spyre enablement stack for Power](https://www.ibm.com/docs/en/ibm-spyre-for-power)
+[IBM PCIe5 x16 AI Accelerator adapter (IBM spyre accelerator card)](https://www.ibm.com/docs/en/power11/9043-MRU?topic=ad-pcie5-x16-ai-accelerator-adapter-fc-ecse-ccin-2e1f)

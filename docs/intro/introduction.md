@@ -18,3 +18,7 @@ This section provides the architectural overview of the Spyre Operator.
 ## Parent topic:
 
 [Spyre Operator for IBM Power User's Guide](../../README.md)
+
+## Related topics:
+
+[IBM Spyre enablement stack for Power](https://www.ibm.com/docs/en/ibm-spyre-for-power)
