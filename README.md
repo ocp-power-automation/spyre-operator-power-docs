@@ -2,7 +2,7 @@
 
 **Last Updated:** 2025-12-17
 
-This document provides an overview of the Spyre Operator for IBM Z and IBM LinuxONE. You will learn how to set up and configure the necessary software stack to make the Spyre Accelerators available to AI workloads that run on Red Hat OpenShift.
+This document provides an overview of the Spyre Operator for IBM Power. You will learn how to set up and configure the necessary software stack to make the Spyre Accelerators available to AI workloads that run on Red Hat OpenShift.
 
 ## [Introduction to the Spyre Operator](docs/introduction/introduction.md)
 
@@ -14,12 +14,10 @@ The Spyre Operator allows users and cluster administrators to configure Spyre in
 
 The Spyre Operator helps your cluster run AI workloads more efficiently. It improves scheduling, manages resources, works with Spyre operators to optimize spyre use, supports AI pipelines, and integrates with IBM AI services.
 
-## [Adding a card after deployment](#)
+## [Adding a card after deployment](docs/adding-a-card/adding-card-after-deployment.md)
 
-## [Recovering Spyre cards on worker node after SSA upgrade](#)
+## [Troubleshooting](docs/troubleshooting/troubleshooting.md)
 
-## [Troubleshooting](#)
+## [Security advisory](docs/security/security.md)
 
-## [Security advisory](#)
-
-## [Limitations for the Spyre Operator](#)
+## [Limitations for the Spyre Operator](docs/limitations/limitations.md)
