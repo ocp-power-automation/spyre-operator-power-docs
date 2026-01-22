@@ -51,4 +51,4 @@ If you have enough resources in the cluster consider increasing the operator dep
 
 ## Parent topic:
 
-[Spyre Operator for IBM Power User's Guide](../README.md)
+[Spyre Operator for IBM Power User's Guide](../../README.md)
