@@ -17,4 +17,4 @@ This section provides the architectural overview of the Spyre Operator.
 
 ## Parent topic:
 
-[Spyre Operator for IBM Z and IBM® LinuxONE User's Guide](../README.md)
+[Spyre Operator for IBM Power User's Guide](../../README.md)

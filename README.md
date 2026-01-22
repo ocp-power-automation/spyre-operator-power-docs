@@ -10,7 +10,7 @@ The Spyre Operator allows users and cluster administrators to configure Spyre in
 
 ## [Prerequisites on Red Hat OpenShift using OperatorHub](docs/prerequisites/prerequisites.md)
 
-## [Installing the Spyre Operator](#)
+## [Installing the Spyre Operator](docs/installation/installation.md)
 
 The Spyre Operator helps your cluster run AI workloads more efficiently. It improves scheduling, manages resources, works with Spyre operators to optimize spyre use, supports AI pipelines, and integrates with IBM AI services.
 

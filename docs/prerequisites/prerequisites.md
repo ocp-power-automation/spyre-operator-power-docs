@@ -32,4 +32,4 @@ The Secondary Scheduler Operator allows you to deploy a custom scheduler alongsi
 
 ## Parent topic:
 
-[Spyre Operator for IBM Z and IBM® LinuxONE User's Guide](../../README.md)
+[Spyre Operator for IBM Power User's Guide](../../README.md)
