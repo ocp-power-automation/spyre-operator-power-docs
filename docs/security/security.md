@@ -61,4 +61,4 @@ This state is caused by the accumulated `WebhookGuardWaitTimeInSec` is longer th
 
 ## Parent topic:
 
-[Spyre Operator for IBM Power User's Guide](../../README.md)
+[Spyre Operator for IBM Power User's Guide](../README.md)
