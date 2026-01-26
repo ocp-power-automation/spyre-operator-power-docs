@@ -97,7 +97,7 @@ apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
   labels:
-    machineconfiguration.openshift.io/role: worker
+    machineconfiguration.openshift.io/role: spyre
   name: 99-vhostuser-bind
 spec:
   config:
@@ -148,7 +148,7 @@ kind: MachineConfig
 metadata:
   labels:
     kubernetes.io/arch: ppc64le
-    machineconfiguration.openshift.io/role: worker
+    machineconfiguration.openshift.io/role: spyre
   name: 99-worker-vfiopci
 spec:
   config:
@@ -195,7 +195,7 @@ apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
   labels:
-    machineconfiguration.openshift.io/role: worker
+    machineconfiguration.openshift.io/role: spyre
   name: 50-spyre-device-plugin-selinux-minimal
 spec:
   config:
