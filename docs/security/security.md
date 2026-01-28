@@ -1,64 +1,55 @@
-# Troubleshooting
+# Security Advisory
 
 **Last Updated:** 2026-01-22
 
-This section presents a list of issues that could be encountered during the operation of the Spyre Operator.
+## General Security Advisory
 
-## Known issues
+The Spyre Operator for Power does not provide additional security features to an existing OCP cluster. In order to fully ensure that your environment is secure, please refer to the Openshift Container Platform documentation on best practices to secure your cluster:
 
-### Missing /etc/aiu/senlib_config.json
+* [Authentication and authorization](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/authentication_and_authorization/index)
+* [Security and Compliance](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/security_and_compliance/index)
 
-- There is no pre-defined volume mounted to path `/etc/aiu`. This folder is reserved for volume mounted by the spyre device plugin only.
+## NodeCompromise-01: Compromised Node Propagation Risk
 
-For example, the following volume mount must be removed:
+In Red Hat OpenShift, a worker node is a highly privileged part of the cluster.
 
-```yaml
-volumeMounts:
-- mountPath: /etc/aiu
-  name: config
-```
+If a worker node becomes compromised—whether through:
 
-### Pod is not scheduled as expected (Pending)
+- A privilege-escalation exploit in a container
+- A kernel or driver vulnerability
+- A misconfigured privileged pod, or
+- Direct SSH/root access misuse
 
-- Check requested resource name especially for the experimental per-device allocation pool.
-- Confirm status of SpyreNodeState and node capacity/allocatable.
-- Run the command to check the allocatable resources of the node
+Then the attacker gains control over the node's host operating system leading to manipulation of local device data, SpyreNodeState, metrics, and possibly operator-managed components — causing cluster-wide security impact.
 
-```bash
-oc describe node <workernode-name> | grep Allocatable -A11
-```
+### Mitigation
 
-### Container status unknown
+- Harden nodes: OS patching, reduce attack surface, disable unnecessary host-level services
+- Use node-level attestation and protect the SpyreNodeState updates (signed payloads or verify the source)
+- Limit node-local credentials and avoid giving node agents broad cluster-wide write permissions
+- Monitor host integrity (file integrity monitoring, EDR) and isolate suspicious nodes automatically
+- Use network segmentation to limit node → control-plane attack surfaces
 
-This state could happen when the spyre resource is in a race condition between multiple resource pools such as default pool and experimental mode's per-device allocation pool. Restarting the pod manually should put it back into a pending state until the device is released.
+## Threat Workload-EoP-04 - Privilege Escalation or Host Compromise via Custom Workload Deployment
 
-### ERROR client-go Failed to update lock: resource name may not be empty
+OpenShift clusters allow teams to deploy custom workloads—including Pods, Deployments, Jobs, and CronJobs. If not properly regulated, users may deploy workloads that:
 
-When `"ERROR client-go Failed to update lock: resource name may not be empty "` is present in the operator log file and is followed by an operator restart indicates that the operator(manager) process could not properly connect to the kubernetes API server. The operator log file can be viewed using your choice of tools. The oc that can be used in this case is: `oclogs spyre-operator-XXX` -- substitute the XXX token for the pod hash code.
+- Run with elevated privileges (`privileged: true`, `CAP_SYS_ADMIN`)
+- Mount the host filesystem (`hostPath:` to `/`, `/etc/kubernetes/`, `/var/lib/kubelet`)
+- Access host namespaces (`hostNetwork`, `hostPID`, `hostIPC`)
+- Bypass filesystem protections (disable `readOnlyRootFilesystem`)
+- Access host devices (`/dev/*`, device plugins, VFIO)
+- Run untrusted or unsigned images
 
-### Recommended actions
+Such configurations create a direct path to container escape, node compromise, and ultimately control-plane impact, especially when combined with kernel exploits or misconfigured security contexts.
 
-This is an expected behavior for any operator that is implemented using the operator runtime and its an indicator of network issues, communications between the node and the API server is interrupted and the same error is present in the log of other operators, it can safely be ignored.
+### Mitigation
 
-If the error is persistent, validate the network connection between the node executing the operator pod and the API server is there and there are no other underlying issues.
+- Limit RBAC permissions for developers; use dedicated namespaces with restricted roles
+- Deny workloads running as root or with unrestricted Linux capabilities
+- Apply SELinux/AppArmor profiles and seccomp restrictions
 
-If you have enough resources in the cluster consider increasing the operator deployment replica count to attenuate any service disruptions.
+---
 
-## MutatingAdmissionWebhook failed to complete mutation in xxs
-
-This state is caused by the accumulated `WebhookGuardWaitTimeInSec` is longer than webhook timeout. `WebhookGuardWaitTimeInSec` is introduced to avoid error due to the conflict. The conflict between any pod A and pod B is determined by requested resource as below:
-
-| Pod A | Pod B | Conflict |
-|-------|-------|----------|
-| spyre_vf | spyre_vf | No |
-| spyre_vf | spyre_vf_(device) | Yes |
-| spyre_vf_(device) | spyre_vf_(device) | No |
-
-### Actions
-
-- Use `Deployment` instead of Pod to deploy your application (recommended).
-- If you choose to use Pod, manually retry the deployment after a few minutes.
-
-## Parent topic:
-
+**Parent topic:**
 [Spyre Operator for IBM Power User's Guide](../../README.md)
